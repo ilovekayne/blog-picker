@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Pick a Kayne Blog</title>
-  <meta name="description" content="One Kayne, eight blogs, eight Jekyll themes. Pick one.">
+  <meta name="description" content="One Kayne, nine blogs, nine Jekyll themes. Pick one.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
@@ -43,7 +43,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 20px;
-      max-width: 1100px;
+      max-width: 900px;
       margin: 0 auto;
     }
     .blog {
@@ -89,6 +89,10 @@
     .portfolio { background: #ffffff; color: #1f2d3d; --edge: #8a9ab0; --tilt: 1deg; }
     .portfolio .name { font-family: Georgia, serif; }
     .nyx       { background: linear-gradient(160deg, #0d0d14, #25153a); color: #d8c8ff; --edge: #5b3a8c; border-color: #8a63d2; }
+    /* polaroid: white frame, thick bottom edge, photo-ish block up top */
+    .photos    { background: #fbfaf6; color: #222; --edge: #cfc9bb; --tilt: -2deg; padding-bottom: 34px; }
+    .photos::before { content: ""; display: block; height: 42px; margin: -6px -6px 6px; border-radius: 4px; background: linear-gradient(135deg, #2b2d42, #8d99ae 60%, #edf2f4); }
+    .photos .name { font-family: "Comic Sans MS", "Marker Felt", cursive; }
 
     .actions { text-align: center; margin: 44px auto 0; }
     #random {
@@ -115,8 +119,8 @@
 </head>
 <body>
   <header>
-    <h1>One Kayne.<br>Eight blogs. <span class="heart">&hearts;</span></h1>
-    <p>Same guy, same love, eight different Jekyll themes. Pick a door.</p>
+    <h1>One Kayne.<br>Nine blogs. <span class="heart">&hearts;</span></h1>
+    <p>Same guy, same love, nine different Jekyll themes. Pick a door.</p>
   </header>
 
   <main class="grid">
@@ -167,6 +171,12 @@
       <span class="name">Kayne After Dark</span>
       <span class="theme">jekyll-theme-nyx</span>
       <span class="pitch">Late night thoughts, in dark mode. Theme built in-house.</span>
+    </a>
+    <a class="blog photos" data-sub="photos" data-port="4008">
+      <span class="badge">easy</span>
+      <span class="name">Kayne Sightings</span>
+      <span class="theme">lens-jekyll-theme</span>
+      <span class="pitch">Paparazzi gallery. He signed the release form.</span>
     </a>
   </main>
 
