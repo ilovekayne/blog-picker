@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pick a Kayne Blog</title>
+  <meta name="description" content="One Kayne, eight blogs, eight Jekyll themes. Pick one.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #14111a;
+      --fg: #f5f0ff;
+      --muted: #a99fbf;
+      --card-shadow: rgba(0, 0, 0, 0.5);
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 10%, #3a1f4d 0%, transparent 40%),
+        radial-gradient(circle at 85% 90%, #1f3a4d 0%, transparent 40%),
+        var(--bg);
+      color: var(--fg);
+      font-family: "Fredoka", system-ui, sans-serif;
+      padding: 48px 16px 64px;
+      overflow-x: hidden;
+    }
+    header { text-align: center; max-width: 720px; margin: 0 auto 40px; }
+    h1 {
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+    h1 .heart { display: inline-block; color: #ff4d8d; animation: beat 1.2s ease-in-out infinite; }
+    @keyframes beat { 0%, 100% { transform: scale(1); } 20% { transform: scale(1.25); } 40% { transform: scale(1); } }
+    header p { color: var(--muted); font-size: 1.15rem; margin: 0; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .blog {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 170px;
+      padding: 22px 22px 20px;
+      border-radius: 18px;
+      text-decoration: none;
+      border: 3px solid transparent;
+      box-shadow: 0 6px 0 var(--edge), 0 14px 30px var(--card-shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .blog:hover, .blog:focus-visible {
+      transform: translateY(-6px) rotate(var(--tilt, -1deg));
+      box-shadow: 0 12px 0 var(--edge), 0 22px 40px var(--card-shadow);
+      outline: none;
+    }
+    .blog:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--edge), 0 6px 14px var(--card-shadow); }
+    .blog .name { font-size: 1.5rem; font-weight: 700; }
+    .blog .theme { font-size: 0.85rem; opacity: 0.8; font-family: "JetBrains Mono", monospace; }
+    .blog .pitch { font-size: 1rem; margin-top: auto; }
+    .blog .badge {
+      position: absolute; top: 14px; right: 14px;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 3px 8px; border-radius: 999px; background: rgba(0,0,0,0.25);
+    }
+
+    /* each button dresses up like its blog */
+    .main      { background: #fdfdfd; color: #111;    --edge: #b5b5b5; --tilt: 1deg; }
+    .hacker    { background: #0b0b0b; color: #39ff14; --edge: #1c7a0c; font-family: "JetBrains Mono", monospace; border-color: #39ff14; }
+    .hacker .name::before { content: "> "; }
+    .hacker .name::after { content: "_"; animation: blink 1s steps(1) infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .beautiful { background: #ffe1ec; color: #880e4f; --edge: #f48fb1; --tilt: 1.5deg; }
+    .beautiful .name { font-family: "Playfair Display", serif; font-style: italic; }
+    .mistakes  { background: #e6f4ef; color: #1e4d3f; --edge: #7fbfa8; }
+    .mistakes .name { text-decoration: line-through; text-decoration-color: #e0475b; text-decoration-thickness: 3px; }
+    .docs      { background: #27262b; color: #e6e1e8; --edge: #7253ed; border-color: #7253ed; --tilt: 1deg; }
+    .chirpy    { background: #1b1b1e; color: #cfd8dc; --edge: #2a408e; border-color: #4a6bdc; }
+    .portfolio { background: #ffffff; color: #1f2d3d; --edge: #8a9ab0; --tilt: 1deg; }
+    .portfolio .name { font-family: Georgia, serif; }
+    .nyx       { background: linear-gradient(160deg, #0d0d14, #25153a); color: #d8c8ff; --edge: #5b3a8c; border-color: #8a63d2; }
+
+    .actions { text-align: center; margin: 44px auto 0; }
+    #random {
+      font: inherit; font-size: 1.25rem; font-weight: 700;
+      color: #14111a; background: #ffd23f;
+      border: none; border-radius: 999px;
+      padding: 16px 34px; cursor: pointer;
+      box-shadow: 0 6px 0 #b8901a, 0 14px 30px var(--card-shadow);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    #random:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 10px 0 #b8901a, 0 18px 34px var(--card-shadow); }
+    #random:active { transform: translateY(3px); box-shadow: 0 2px 0 #b8901a; }
+    .shake { animation: shake 0.5s ease; }
+    @keyframes shake { 0%,100% { transform: translateX(0); } 20%,60% { transform: translateX(-8px) rotate(-2deg); } 40%,80% { transform: translateX(8px) rotate(2deg); } }
+
+    footer { text-align: center; color: var(--muted); margin-top: 48px; font-size: 0.95rem; }
+    footer code { font-family: "JetBrains Mono", monospace; color: var(--fg); }
+    #mode { display: inline-block; margin-top: 8px; font-family: "JetBrains Mono", monospace; font-size: 0.8rem; opacity: 0.7; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>One Kayne.<br>Eight blogs. <span class="heart">&hearts;</span></h1>
+    <p>Same guy, same love, eight different Jekyll themes. Pick a door.</p>
+  </header>
+
+  <main class="grid">
+    <a class="blog main" data-sub="" data-port="4000">
+      <span class="badge">the OG</span>
+      <span class="name">We Love Kayne</span>
+      <span class="theme">minima</span>
+      <span class="pitch">Where it all started. 53 posts and counting.</span>
+    </a>
+    <a class="blog hacker" data-sub="hacker" data-port="4001">
+      <span class="badge">easy</span>
+      <span class="name">0xKAYNE</span>
+      <span class="theme">jekyll-theme-hacker</span>
+      <span class="pitch">A crew tries to hack Kayne and steal his secrets. Because they love him.</span>
+    </a>
+    <a class="blog beautiful" data-sub="beautiful" data-port="4002">
+      <span class="badge">easy</span>
+      <span class="name">Kayne, Beautifully</span>
+      <span class="theme">beautiful-jekyll</span>
+      <span class="pitch">Soft love letters and gratitude journals.</span>
+    </a>
+    <a class="blog mistakes" data-sub="mistakes" data-port="4003">
+      <span class="badge">medium</span>
+      <span class="name">Kayne's Mistakes</span>
+      <span class="theme">minimal-mistakes</span>
+      <span class="pitch">A full audit of every mistake he's ever made. It's empty.</span>
+    </a>
+    <a class="blog docs" data-sub="docs" data-port="4004">
+      <span class="badge">medium</span>
+      <span class="name">Kayne Docs</span>
+      <span class="theme">just-the-docs</span>
+      <span class="pitch">Official documentation for Kayne v&infin;. Full API reference included.</span>
+    </a>
+    <a class="blog chirpy" data-sub="chirpy" data-port="4005">
+      <span class="badge">medium</span>
+      <span class="name">Kayne Writeups</span>
+      <span class="theme">jekyll-theme-chirpy</span>
+      <span class="pitch">CTF writeups where every flag is about Kayne.</span>
+    </a>
+    <a class="blog portfolio" data-sub="portfolio" data-port="4006">
+      <span class="badge">medium</span>
+      <span class="name">Kayne's Resume</span>
+      <span class="theme">modern-resume-theme</span>
+      <span class="pitch">Chief Awesomeness Officer. References available (it's everyone).</span>
+    </a>
+    <a class="blog nyx" data-sub="nyx" data-port="4007">
+      <span class="badge">homemade</span>
+      <span class="name">Kayne After Dark</span>
+      <span class="theme">jekyll-theme-nyx</span>
+      <span class="pitch">Late night thoughts, in dark mode. Theme built in-house.</span>
+    </a>
+  </main>
+
+  <div class="actions">
+    <button id="random" type="button">I can't choose, surprise me</button>
+  </div>
+
+  <footer>
+    Every one of these is just Markdown + a theme, hosted free on GitHub Pages.<br>
+    Made for the Cyber@Stout "how to make a blog" talk.<br>
+    <span id="mode"></span>
+  </footer>
+
+  <script>
+    // On localhost, point at the local `jekyll serve` ports; otherwise the real subdomains.
+    const local = ["localhost", "127.0.0.1"].includes(location.hostname);
+    const blogs = [...document.querySelectorAll(".blog")];
+
+    blogs.forEach((a) => {
+      const sub = a.dataset.sub;
+      a.href = local
+        ? `http://localhost:${a.dataset.port}/`
+        : `https://${sub ? sub + "." : ""}ilovekayne.xyz/`;
+    });
+
+    document.getElementById("mode").textContent = local
+      ? "local preview mode: linking to localhost ports"
+      : "";
+
+    const btn = document.getElementById("random");
+    btn.addEventListener("click", () => {
+      btn.classList.remove("shake");
+      void btn.offsetWidth;
+      btn.classList.add("shake");
+      const pick = blogs[Math.floor(Math.random() * blogs.length)];
+      btn.textContent = "Rolling...";
+      setTimeout(() => { location.href = pick.href; }, 600);
+    });
+  </script>
+</body>
+</html>
