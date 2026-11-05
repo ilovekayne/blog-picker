@@ -200,6 +200,8 @@
       a.href = local
         ? `http://localhost:${a.dataset.port}/`
         : `https://${sub ? sub + "." : ""}ilovekayne.xyz/`;
+      a.target = "_blank";
+      a.rel = "noopener";
     });
 
     document.getElementById("mode").textContent = local
@@ -213,7 +215,10 @@
       btn.classList.add("shake");
       const pick = blogs[Math.floor(Math.random() * blogs.length)];
       btn.textContent = "Rolling...";
-      setTimeout(() => { location.href = pick.href; }, 600);
+      setTimeout(() => {
+        window.open(pick.href, "_blank", "noopener");
+        btn.textContent = "I can't choose, surprise me";
+      }, 600);
     });
   </script>
 </body>
